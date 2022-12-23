@@ -39,12 +39,4 @@ CSS
 Javascript
 Canvas
 
-Start Screen: https://files.slack.com/files-pri/T0351JZQ0-F04GHQMAV19/download/savethempic1.jpg?origin_team=T0351JZQ0
-
-Game Setting: https://files.slack.com/files-pri/T0351JZQ0-F04G3C86GDV/download/savethempic2.jpg?origin_team=T0351JZQ0
-
-How To Play: https://files.slack.com/files-pri/T0351JZQ0-F04G3C8NJRM/download/savethempic3.jpg?origin_team=T0351JZQ0
-
-YOU LOST: https://files.slack.com/files-pri/T0351JZQ0-F04GBAM3CR4/download/savethempic4.jpg?origin_team=T0351JZQ0
-
-YOU WON!: https://files.slack.com/files-pri/T0351JZQ0-F04GBAMJ5PG/download/savethempic5.jpg?origin_team=T0351JZQ0
+![image1](Savethempic1.jpg)
