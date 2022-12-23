@@ -39,7 +39,7 @@ CSS
 Javascript
 Canvas
 
-![alt text](Savethempic1.jpg)
+![Picture](Savethempic1.jpg)
 ![Second Image](/Users/kenny/Downloads/Savethemimages/Savethempic1.jpg)
 ![Third Image]()
 ![Fourth image]()
