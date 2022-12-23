@@ -46,4 +46,4 @@ Optional: player can choose their different styles at the beginning.
 
 ## Blueprints
 
-![image1](Images/Savethempic1.jpg)
+![image1](Images/Save Them Image 1.jpg)
