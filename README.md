@@ -50,4 +50,4 @@ Optional: player can choose their different styles at the beginning.
 ![Image2](Images/Save_Them_Image_2.jpg)
 ![Image3](Images/Save_Them_Image_3.jpg)
 ![Image4](Images/Save_Them_Image_4.jpg)
-![Image5]](Images/Save_Them_Image_5.jpg)
+![Image5](Images/Save_Them_Image_5.jpg)
