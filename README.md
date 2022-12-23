@@ -39,3 +39,5 @@ CSS
 Javascript
 Canvas
 
+Savethempic1.jpg
+Savethempic2.jpg
