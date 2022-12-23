@@ -1,7 +1,7 @@
 # Savethem
 
 ## OVERVIEW: 
-This is a game where you have to save the person in distress by getting pass obstacles and avoding the monster that is chasing you.
+This is a game where the player will have to save their friend in distress. It wont be easy as you will have to get pass obstacles and avoid the monster that'll be chasing you.
 
 ## User Stories
 As a user, i want to be able to find and reach the person in help while the monster is chasing you.
@@ -39,17 +39,19 @@ Optional: Player can chose the difficulty between normal/hard.
 Optional: player can choose their different styles at the beginning.
 
 ## Technologies I'll be using:
-HTML5
-CSS
-Javascript
-Canvas
+- HTML5
+- CSS
+- Javascript
+- Canvas
 
-Start Screen: https://files.slack.com/files-pri/T0351JZQ0-F04GHQMAV19/download/savethempic1.jpg?origin_team=T0351JZQ0
+## Blueprints
 
-Game Setting: https://files.slack.com/files-pri/T0351JZQ0-F04G3C86GDV/download/savethempic2.jpg?origin_team=T0351JZQ0
+**Start Screen**: <br> https://files.slack.com/files-pri/T0351JZQ0-F04GHQMAV19/download/savethempic1.jpg?origin_team=T0351JZQ0
 
-How To Play: https://files.slack.com/files-pri/T0351JZQ0-F04G3C8NJRM/download/savethempic3.jpg?origin_team=T0351JZQ0
+**Game Setting**: <br> https://files.slack.com/files-pri/T0351JZQ0-F04G3C86GDV/download/savethempic2.jpg?origin_team=T0351JZQ0
 
-YOU LOST: https://files.slack.com/files-pri/T0351JZQ0-F04GBAM3CR4/download/savethempic4.jpg?origin_team=T0351JZQ0
+**How To Play**: <br> https://files.slack.com/files-pri/T0351JZQ0-F04G3C8NJRM/download/savethempic3.jpg?origin_team=T0351JZQ0
 
-YOU WON!: https://files.slack.com/files-pri/T0351JZQ0-F04GBAMJ5PG/download/savethempic5.jpg?origin_team=T0351JZQ0
+**YOU LOST**: <br> https://files.slack.com/files-pri/T0351JZQ0-F04GBAM3CR4/download/savethempic4.jpg?origin_team=T0351JZQ0
+
+**YOU WON!**: <br> https://files.slack.com/files-pri/T0351JZQ0-F04GBAMJ5PG/download/savethempic5.jpg?origin_team=T0351JZQ0
