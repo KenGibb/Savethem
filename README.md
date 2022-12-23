@@ -1,5 +1,7 @@
 # Savethem
-My first game
+
+OVERVIEW: This is a game where you have to save the person in distress by getting pass obstacles and avoding the monster that is chasing you.
+
 As a user, i want to be able to find and reach the person in help while the monster is chasing you.
 
 As a user, I want I'll need to be able to create at least 3 things: Player Avatar, Person-in-danger Avatar, and a monster. 
@@ -30,3 +32,10 @@ Optional: Player can regain hit points with health packs but you’ll have to im
 
 Optional: Player can chose the difficulty between normal/hard.
 Optional: player can choose their different styles at the beginning.
+
+Technologies I'll be using:
+HTML5
+CSS
+Javascript
+Canvas
+

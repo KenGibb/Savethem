@@ -1,0 +1,20 @@
+html,body {
+    margin: 0;
+    padding: 0;
+  }
+
+#canvas {
+    background-color: black;
+    margin: 0 auto;
+    border: 20px solid goldenrod;
+    width: 100%;
+    
+}
+
+.game {
+    margin: 0 auto;
+    display: flex;
+    border: 5px solid pink;
+    width: 90%;
+}
+
