@@ -1,20 +1,50 @@
 html,body {
     margin: 0;
     padding: 0;
+    border: 100px solid rgb(5, 5, 37)
   }
 
-#canvas {
+  h1 {
     background-color: black;
+  }
+
+.rainbow {
+    text-align: center;
+    font-family: arial black;
+    background-color: goldenrod;
+    border: 5px transparent black;
+    font-size: 70px;
+    background-image: 
+    linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+    animation: move 90s linear infinite;
+}
+
+@keyframes move {
+    to {
+      background-position: 4500vh;
+    }
+  }
+
+  .button {
+    position: absolute;
+
+  }
+
+
+#canvas {
+    background-color: rgb(5, 5, 37);
     margin: 0 auto;
-    border: 20px solid goldenrod;
+    border: 25px solid goldenrod;
     width: 100%;
     
 }
 
-.game {
+#game {
     margin: 0 auto;
     display: flex;
-    border: 5px solid pink;
+    border: 5px solid rgb(37, 37, 37);
     width: 90%;
 }
 
