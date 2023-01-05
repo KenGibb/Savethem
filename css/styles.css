@@ -1,50 +1,156 @@
 html,body {
     margin: 0;
     padding: 0;
-    border: 100px solid rgb(5, 5, 37)
+    text-align: center;
+    background-color: black
   }
 
-  h1 {
-    background-color: black;
-  }
-
-.rainbow {
+  .rainbow {
     text-align: center;
     font-family: arial black;
-    background-color: goldenrod;
+    
     border: 5px transparent black;
     font-size: 70px;
     background-image: 
     linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;  
-    animation: move 90s linear infinite;
+    animation: move 300s linear infinite;
 }
 
 @keyframes move {
     to {
-      background-position: 4500vh;
+      background-position: 1000vh;
     }
   }
 
-  .button {
-    position: absolute;
 
+  #container {
+    max-width: 75em;
+    background-color: goldenrod;
+    display: block;
+  padding: 1em;
+  /*display: grid;
+  grid-gap: 1em;
+  grid-template-rows: .25fr .5fr .25fr;
+  grid-template-columns: .25fr .5fr .25fr;
+  grid-template-areas: "top-left top-right top-right"
+                      "game game game"
+                      "btm-left btm-right btm-right"; */
+  margin: 0 auto;
+  width: 95%;
+  height: 100vh;
   }
 
+ /*
 
-#canvas {
-    background-color: rgb(5, 5, 37);
-    margin: 0 auto;
-    border: 25px solid goldenrod;
-    width: 100%;
+  #button {
+    position: relative;
+    font-family: 'Kaushan Script', monospace;
+    top: 210px;
+    z-index: 1;
+    background-color: silver;
+    border: dotted;
+    color: gold;
+    text-align: center;
+    font-size: 50px;
+    align-self: center;
     
+  }
+
+  #button2 {
+    position: relative;
+    font-family: 'Kaushan Script', monospace;
+    top: 210px;
+    z-index: 1;
+    background-color: silver;
+    border: dotted;
+    color: gold;
+    text-align: center;
+    font-size: 30px;
+    align-self: center;
+    
+  }
+
+  #button:hover {
+    cursor: pointer;
+    color: black;
+    background-color: gray;
+    border: none;
+  }
+
+  #button2:hover {
+    cursor: pointer;
+    color: black;
+    background-color: gray;
+    border: none;
+  }
+
+  */
+ 
+#canvas {
+    position: absolute;
+    top: 25%;
+    /* left: 1px; */
+    background-color: white;
+    border: 5px solid white;
+    width: 65em;
+    padding: 1em;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-rows: .25fr .5fr .25fr;
+  grid-template-columns: .25fr .5fr .25fr;
+  grid-template-areas: "top-left top-left top-right"
+                      "game game game"
+                      "btm-left btm-right btm-right";
+    
+} 
+
+aside {
+    width: 15vw;
+    background-color: aqua;
 }
 
-#game {
-    margin: 0 auto;
+#timer {
+    z-index: 2;
+    color: white;
+}
+
+#health {
+    z-index: 2;
+    color: white;
+}
+
+#top-left, #top-right, #btm-left, #btm-right {
     display: flex;
-    border: 5px solid rgb(37, 37, 37);
-    width: 90%;
-}
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(122, 122, 122);
+  }
 
+  #top-left {
+    grid-area: top-left;
+  }
+  
+  #top-right {
+    grid-area: top-right;
+   
+  }
+  
+  canvas {
+    grid-area: game;
+  }
+
+  button, #button2 {
+    grid-area: game;
+  }
+  
+  
+  #btm-left {
+    grid-area: btm-left;
+    
+  }
+  
+  #btm-right {
+    grid-area: btm-right;
+  }
