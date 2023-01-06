@@ -23,10 +23,10 @@ const movement = document.getElementById('movement')
 const message = document.getElementById('status')
 const startGame = document.getElementById('button')
 const menu = document.getElementById('button2')
-const health = document.getElementById('canvas2')
+// const life = document.getElementById('canvas2')
 
 // if we want to test if we got the right elements, you can do this:
-canvas2.innerText = 'some stuff'
+status.innerText = 'some stuff'
 
 // we need to SET the game's context to be 2d
 // we also want to save that context to a variable for reference later
@@ -45,7 +45,7 @@ game.height = 320
 game.width = 480
 
 
-//////////// CRAWLER CLASS /////////////////////
+//////////// MONSTER CLASS /////////////////////
 // Since these two objects are basically the same, we can create a class to keep our code dry.
 class Monster  {
     constructor(x, y, width, height, color) {
@@ -142,15 +142,15 @@ const getRandomCoordinates = (max) => {
     return Math.floor(Math.random() * max)
 }
 
-const player = new Savior (10, 10, 16, 16, 'lightsteelblue')
-const ogre = new Monster (200, 50, 32, 48, '#bada55')
+const player = new Savior (220, 150, 10, 20, 'brown')
+const ogre = new Monster (200, 50, 40, 70, '#badbad')
 const ogre2 = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'red')
 
 ////////// Health Bar ///////////
-const canvas = document.getElementById("canvas");
+const canvas = document.getElementById("canvas2");
 const context = canvas.getContext("2d");
-const width = canvas.width = 320;
-const height = canvas.height = 480;
+const width = canvas.width = 270;
+const height = canvas.height = 100;
 
 canvas.style.marginTop = window.innerHeight / 2 - height / 2 + "px";
 
@@ -231,7 +231,7 @@ const gameLoop = () => {
 
     player.render()
     player.movePlayer()
-    movement.textContent = `${player.x}, ${player.y}`
+    //movement.textContent = `${player.x}, ${player.y}`
 }
 
 //////////// EVENT LISTENERS /////////////////////
