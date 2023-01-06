@@ -1,21 +1,22 @@
-html,body {
+/* html,body {
     margin: 0;
     padding: 0;
     text-align: center;
     background-color: black
   }
-
-  .rainbow {
+*/
+  
+  .title {
     text-align: center;
     font-family: arial black;
     
     border: 5px transparent black;
     font-size: 70px;
     background-image: 
-    linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); 
+    linear-gradient(to right, red,blue); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;  
-    animation: move 300s linear infinite;
+    animation: move 2s linear infinite;
 }
 
 @keyframes move {
@@ -24,7 +25,7 @@ html,body {
     }
   }
 
-
+/*
   #container {
     max-width: 75em;
     background-color: goldenrod;
@@ -36,12 +37,9 @@ html,body {
   grid-template-columns: .25fr .5fr .25fr;
   grid-template-areas: "top-left top-right top-right"
                       "game game game"
-                      "btm-left btm-right btm-right"; */
-  margin: 0 auto;
-  width: 95%;
-  height: 100vh;
-  }
-
+                      "btm-left btm-right btm-right"; 
+  
+ 
  /*
 
   #button {
@@ -87,31 +85,30 @@ html,body {
   }
 
   */
- 
+ /*
 #canvas {
     position: absolute;
     top: 25%;
-    /* left: 1px; */
-    background-color: white;
-    border: 5px solid white;
-    width: 65em;
-    padding: 1em;
-  display: grid;
+     left: 100px; 
+    /*background-color: white;*/
+    
+ /* display: grid;
   grid-gap: 1em;
   grid-template-rows: .25fr .5fr .25fr;
   grid-template-columns: .25fr .5fr .25fr;
   grid-template-areas: "top-left top-left top-right"
                       "game game game"
                       "btm-left btm-right btm-right";
+                      
     
-} 
-
+} */
+/*
 aside {
     width: 15vw;
     background-color: aqua;
 }
 
-#timer {
+#clock {
     z-index: 2;
     color: white;
 }
@@ -153,4 +150,80 @@ aside {
   
   #btm-right {
     grid-area: btm-right;
+  } */
+  
+
+  html,body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    padding-top: 1em;
+    text-align: center;
+    background-color: rgb(31, 2, 50);
+    /* background-image:; */
+    background-size: cover;
+    background-repeat: space;
+  }
+  
+  h1, h2 {
+    font-family: 'Kaushan Script', monospace;
+   
+    color: goldenrod;
+  }
+  
+  canvas {
+    /* background-image: ; */
+    /* background-repeat: repeat; */
+    background-color: #222;
+    width: 100%;
+    height: 100;
+  }
+  
+  #container {
+  max-width: 50em;
+  /* height: 70vh; */
+  background-color: gold;
+  margin: 0 auto;
+  padding: 1em;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-rows: .25fr .5fr .25fr;
+  grid-template-columns: .25fr .5fr .25fr;
+  grid-template-areas: "top-left top-left top-right"
+                        "game game game"
+                        "btm-left btm-right btm-right";
+  }
+  
+  #top-left, #top-right, #btm-left, #btm-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+  }
+  
+  #top-left {
+    grid-area: top-left;
+  }
+  
+  #top-right {
+    grid-area: top-right;
+    /* background-color: #222; */
+    /* background-image: url('../img/funky-lines.png'); */
+  }
+  
+  main {
+    grid-area: game;
+  }
+  
+  
+  #btm-left {
+    grid-area: btm-left;
+    /* background-color: #222; */
+  }
+  
+  #btm-right {
+    grid-area: btm-right;
+     background-color: rgb(0, 0, 0); 
   }

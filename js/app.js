@@ -10,32 +10,42 @@
 
 // html elements to refer to later
 const game = document.getElementById('canvas')
-const timer = document.getElementById('timer')
+const timer = document.getElementById('clock')
+const health = document.getElementById('health')
 const startGame = document.getElementById('button')
 const menu = document.getElementById('button2')
-const health = document.getElementById('health')
 
-// timer.innerText = 'hhhh'
+
+ health.innerText = 'hhhh'
 
 const ctx = game.getContext('2d')
+ctx.fillStyle = "blue"
+ctx.strokeStyle = "red"
+ctx.lineWidth = 5;
 
+
+ctx.fillRect(10, 10, 100, 100);
+ctx.strokeRect(10, 10, 100, 100);
 //console.log('game before setting v and h')
 
 game.setAttribute('width', getComputedStyle(game)['width'])
 game.setAttribute('height', getComputedStyle(game)['height'])
-game.height = 480
+game.height = 500
+
+
 
 ///// Person-in-need Class /////
 class Friend {
     constructor(x, y, width, height, color) {
-        this.x = x
-        this.y = y
+        this.x = 10
+        this.y = 10
         this.width = width
         this.height = height
         this.color = color
         this.alive = true
         this.render = function () {
-            ctx.fillStyle = this
+            ctx.fillStyle = this.color
+            ctx.fillRect(this.x, this.y, this.width, this.height)
         }
     }
 }
@@ -126,17 +136,20 @@ class Monster {
         this.color = color
         this.alive = true
         this.speed = 15
-        this.render = function (follow) {
+        this.render = function () {
             ctx.fillStyle = this.color
             ctx.fillRect(this.x, this.y, this,width, this.height)
             // monster needs to know players coordinates at all times
-            
+            // needs follow function
         }
     }
 }
 
-const player = new Savior(10, 10, 16, 16, 'lightsteelblue')
-const monster = new Monster (200, 50, 32, 48, '#bada55')
-const friend = new Friend (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'red')
+const player = new Savior(50, 50, 16, 16, 'brown')
+const monster = new Monster (200, 50, 32, 48, 'red')
+const friend = new Friend (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'blue')
 
-Savior.render()
+player.render()
+monster.render()
+friend.render()
+
