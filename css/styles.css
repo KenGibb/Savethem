@@ -6,17 +6,17 @@
   }
 */
   
-  .title {
+.title {
     text-align: center;
-    font-family: 'Kaushan Script' black;
+    font-family: arial black;
     
     border: 5px transparent black;
     font-size: 70px;
     background-image: 
-    linear-gradient(to right, gold,rgb(51, 3, 133)); 
+    linear-gradient(to right, red,blue); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;  
-    animation: move 20s linear infinite;
+    animation: move 2s linear infinite;
 }
 
 @keyframes move {
@@ -176,7 +176,7 @@ aside {
   canvas {
     /* background-image: ; */
     /* background-repeat: repeat; */
-    background-color: #222;
+    background-color: rgba(72, 71, 71, 0.774);
     width: 100%;
     height: 100;
   }
@@ -220,18 +220,18 @@ aside {
   
   #btm-left {
     grid-area: btm-left;
-    /* background-color: #222; */
+    background-color: black; 
   }
   
   #btm-right {
     grid-area: btm-right;
-     background-color: rgb(0, 0, 0); 
+     background-color: black; 
   }
   #canvas2 {
-    background: #EEE;
+    background: black;
     display: block;
     margin: 0 auto;
-    border: solid 6px #444;
-    width: 50%;
+    /* border: solid 6px #444;*/
+    width: 100%;
     height: 100px;
   }

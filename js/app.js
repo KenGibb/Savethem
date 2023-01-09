@@ -1,23 +1,3 @@
-// This is an extension/refactoring of the fruitcakes branch of this repo.
-// more notes and comments are in the code on that branch.
-// this version incorporates smoother movement, and a more open ended collision detection
-// this also has a second enemy to face, which creates a new win condition(kill two ogres)
-
-// requirements and goals 
-// make a simple crawler game using canvas that we manipulate in js
-
-// ///////// RULES FOR THE GAME ////////////
-// we need two entities, a savior and an monster
-// the savior should move with the WASD or ARROW keys(display savior coords)
-// the monster(for now) will be stationary
-// the savior and the first monster should be able to collide to make something happen
-// when the savior collides with the first monster, monster 1 is removed from the screen, and monster 2 appears
-// after hitting monster 2, the game stops, and sends a message to the user that they have won.
-// ////////////// END RULES /////////////////
-
-//////////// INITIAL SETUP /////////////////////
-
-// first we grab our HTML elements for easy reference later
 const game = document.getElementById('canvas')
 const movement = document.getElementById('movement')
 const message = document.getElementById('status')
@@ -56,7 +36,9 @@ class Wall {
         this.width = width
         this.height = height
         this.color = color
+        
        // this.alive = true
+
         this.render = function () {
             ctx.fillStyle = this.color
             ctx.fillRect(this.x, this.y, this.width, this.height)
@@ -117,7 +99,7 @@ class Savior  {
         //this.maxHealth = maxHealth
         //this.health = maxHealth
         // we need additional props on our savior class to make movement smoother
-        this.speed = 20
+        this.speed = 10
         // now we'll add direction, which will be set with our move handler
         this.direction = {
             up: false,
@@ -186,12 +168,16 @@ const getRandomCoordinates = (max) => {
     return Math.floor(Math.random() * max)
 }
 
-const block = new Wall(200, 50, 2, 50, 'white')
+const block = new Wall(200, 50, 5, 50, 'white')
+const block2 = new Wall (100, 60, 5, 75, 'white')
+const block3 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 55, 3, 'white')
+const block4 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 5, 40, 'white')
+const block5 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 55, 5, 'white')
 const player = new Savior (220, 150, 10, 20, 'green')
 const monster = new Monster (10, 120, 40, 70, 'red')
 // const block = new Wall (300, 300, 10, 55, 'brown')
-const ogre2 = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'red')
-const ogre3 = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'red')
+// const ogre2 = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'red')
+// const ogre3 = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'red')
 
 
 
@@ -200,6 +186,7 @@ const ogre3 = new Monster (getRandomCoordinates(game.width), getRandomCoordinate
 // player.render()
 // monster.render()
 // block.render()
+// block3.render()
 
 // MOVEMENT HANDLING KEY EVENTS
 
@@ -212,41 +199,46 @@ const ogre3 = new Monster (getRandomCoordinates(game.width), getRandomCoordinate
 const detectHit = (thing) => {
     // we'll basically use a big if statement, to be able to tell if any of the sides
     // of our savior interact with any of the sides of our monster
-    if (player.x < thing.x + thing.width
-        && player.x + player.width > thing.x
-        && player.y < thing.y + thing.height
-        && player.y + player.height > thing.y) {
+    if (monster.x < thing.x + thing.width
+        && monster.x + monster.width > thing.x
+        && monster.y < thing.y + thing.height
+        && monster.y + monster.height > thing.y) {
             console.log('HIT!')
             thing.alive = false
         }
 }
-//// Collide with wall detection ///////
+
+
+
 const detectWall = (wall) => {
     if (player.x < wall.x + wall.width
         && player.x + player.width > wall.x
         && player.y < wall.y + wall.height
         && player.y + player.height > wall.y) {
             console.log("BLOCKED!")
-            render.wall()
+            move = move * -1
+        //} else {
+            
         }
 
 }
-
 ////////// Health Bar ///////////
+// the player will need to have a healthbar so when a hit is detected from the monster, health will go down 
+// if health bar reaches 0 the player.alive will need to be false and game will end
 const canvas = document.getElementById("canvas2");
 const context = canvas.getContext("2d");
 const width = canvas.width = 270;
 const height = canvas.height = 100;
 
-canvas.style.marginTop = window.innerHeight / 22 - height / 2 + "px";
+canvas.style.marginTop = window.innerHeight / 32 - height / 12 + "px";
 
-let health = 100;
+let playerHealth = 100;
 const healthBarWidth = 200;
 const healthBarHeight = 30;
 const x = width / 2 - healthBarWidth / 2;
 const y = height / 2 - healthBarHeight / 2;
 
-const healthBar = new HealthBar(x, y, healthBarWidth, healthBarHeight, health, "green");
+const healthBar = new HealthBar(x, y, healthBarWidth, healthBarHeight, playerHealth, "green");
 
 const framed = function() {
   context.clearRect(0, 0, width, height);
@@ -255,14 +247,15 @@ const framed = function() {
 }
 
 canvas.onclick = function() {
-  health -= 50;
-  healthBar.updateHealth(health);
+  playerHealth -= 50;
+  healthBar.updateHealth(playerHealth);
 };
 
 framed();
 
 /////////////////////////////////////////////////////////////////////////////////////////
-
+///// MOVE ///////
+const move = 5
 
 //////////// GAME LOOP /////////////////////
 // we're going to set up a gameLoop function
@@ -281,25 +274,49 @@ const gameLoop = () => {
     // we'll just see our player square moving around
     ctx.clearRect(0, 0, game.width, game.height)
 
-    if (monster.alive) {
-        monster.render()
-        detectHit(monster)
-    } else if (ogre2.alive) {
-        message.textContent = 'Now Kill Shrek 2!'
-        ogre2.render()
-        detectHit(ogre2)
-    } else if (ogre3.alive) {
-        message.textContent = 'Now Kill Shrek 3!'
-        ogre3.render()
-        detectHit(ogre3)
-    } else {
-        message.textContent = 'You win!'
-        stopGameLoop()
+   // if (monster.alive) {
+   //     monster.render()
+   //     detectHit(monster)
+   // } else if (ogre2.alive) {
+   //     message.textContent = 'Now Kill Shrek 2!'
+   //     ogre2.render()
+   //     detectHit(ogre2)
+   // } else if (ogre3.alive) {
+   //     message.textContent = 'Now Kill Shrek 3!'
+   //     ogre3.render()
+   //     detectHit(ogre3)
+   // } else {
+   //     message.textContent = 'You win!'
+   //     stopGameLoop()
+   // }
+
+   if (player.alive) {
+    monster.render()
+    detectHit(player)
+} else {
+    message.textContent = 'You lost!'
+    stopGameLoop()
+}
+
+    ////// Player detects wall ///////
+    // the wall needs to be able to block player 
+    if(player.x <= block.x + block.width &&
+        player.x >= block.x - block.width &&
+        player.y <= block.y + block.height &&
+        player.y >= block.y - block.height) {
+        console.log('moved')
+        player.x = move * 10
+        player.y = move * 10
     }
 
+        
     player.render()
     player.movePlayer()
     block.render()
+    block2.render()
+    block3.render()
+    block4.render()
+    block5.render()
 
     //movement.textContent = `${player.x}, ${player.y}`
 }
@@ -321,6 +338,12 @@ document.addEventListener('keyup', (e) => {
         player.unsetDirection(e.key)
     }
 })
+
+// Start Game
+const startGameLoop = () => {
+    document.getElementById('button')
+
+}
 
 // we're going to save our game interval to a variable so we can stop it when we want to
 // this interval runs the game loop every 60ms until we tell it to stop
