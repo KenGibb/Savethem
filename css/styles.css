@@ -8,15 +8,15 @@
   
   .title {
     text-align: center;
-    font-family: arial black;
+    font-family: 'Kaushan Script' black;
     
     border: 5px transparent black;
     font-size: 70px;
     background-image: 
-    linear-gradient(to right, red,blue); 
+    linear-gradient(to right, gold,rgb(51, 3, 133)); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;  
-    animation: move 2s linear infinite;
+    animation: move 20s linear infinite;
 }
 
 @keyframes move {
