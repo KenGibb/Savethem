@@ -9,7 +9,7 @@ const menu = document.getElementById('button2')
 
 function htp () {
     document.getElementById('button2')
-    menu.innerText = 'How to play: Avoid the monster and rescue your friend! Use WASD to move'
+    menu.innerText = 'How to play: Avoid the monster and rescue your friend! Use WASD to move. \n Do not touch the sticky walls!'
 }
 
 // we need to SET the game's context to be 2d
@@ -47,8 +47,6 @@ class Wall {
             ctx.fillStyle = this.color
             ctx.fillRect(this.x, this.y, this.width, this.height)
         }
-
-        ///// Wall collider? /////
     }
 }
 
@@ -104,32 +102,6 @@ class Monster  {
                 this.direction.down = false
             }
         }
-        
-
-    
-
-
-        // Monster needs to be able to move towards player's direction at a certain speed
-        // this.setDirection = function moveMonster() {
-        //     if (Savior.x > Monster.x) {
-        //         Monster.x += Monster.speed
-        //         monster.direction = "right"
-        //     }
-        //     if (Savior.x < Monster.x) {
-        //         Monster.x -= Monster.speed
-        //         monster.direction = "left"
-        //     }
-        //     if (Savior.y > Monster.y) {
-        //         Monster.y += Monster.speed
-        //         monster.direction = "down"
-        //     }
-        //     if (Savior.y < Monster.y) {
-        //         Monster.y -= Monster.speed
-        //         monster.direction = "up"
-        //     }
-        // }
-        // moveMonster()
-
     }
 }
 
@@ -144,7 +116,7 @@ class Savior  {
         //this.maxHealth = maxHealth
         //this.health = maxHealth
         // we need additional props on our savior class to make movement smoother
-        this.speed = 15
+        this.speed = 8
         // now we'll add direction, which will be set with our move handler
         this.direction = {
             up: false,
@@ -208,18 +180,36 @@ class Savior  {
     }
 }
 
+///////////////// Friend Class ///////////////////
+class Friend { 
+    constructor(x, y, width, height, color, speed) {
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.color = color
+        this.alive = true
+        this.speed = speed
+        this.render = function () {
+            ctx.fillStyle = this.color
+            ctx.fillRect(this.x, this.y, this.width, this.height)
+        }
+    }
+}
+//////////////////////////////////////////////////
 const getRandomCoordinates = (max) => {
     // we'll use math.random to produce a random number
     return Math.floor(Math.random() * max)
 }
 
-const block = new Wall(200, 50, 5, 50, 'white')
-//const block2 = new Wall (100, 60, 5, 75, 'white')
-// const block3 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 55, 3, 'white')
-// const block4 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 5, 40, 'white')
-// const block5 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 55, 5, 'white')
+const block = new Wall (200, 50, 9, 50, 'beige')
+const block2 = new Wall (100, 60, 5, 75, 'white')
+const block3 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 55, 3, 'beige')
+const block4 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 5, 40, 'white')
+const block5 = new Wall (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 55, 5, 'white')
 const player = new Savior (220, 150, 10, 20, 'green')
-const monster = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 35, 50, 'black', 8)
+const monster = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 35, 50, 'black', 2)
+const friend = new Friend (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 10, 10, 'purple', 2)
 // const block = new Wall (300, 300, 10, 55, 'brown')
 // const ogre2 = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'red')
 // const ogre3 = new Monster (getRandomCoordinates(game.width), getRandomCoordinates(game.height), 64, 96, 'red')
@@ -249,26 +239,40 @@ const detectHit = (thing) => {
         && monster.y < thing.y + thing.height
         && monster.y + monster.height > thing.y) {
             console.log('HIT!')
-            thing.alive = false
+            player.alive = false
         }
 }
-//////////////////////////////
+////////////// Wall ////////////////
 const detectTouch = (rect1, rect2) => {
-    if(rect1.x < rect2.x + rect2.width &&
-        rect1.x + rect1.width > rect2.x &&
-        rect1.y < rect2.y + rect2.height &&
-        rect1.y + rect1.height > rect2.y){
-            // Collided!
-            return true ;
-        } else {
-            return false
+    if(rect1.x <= rect2.x + rect2.width &&
+        rect1.x + rect1.width >= rect2.x &&
+        rect1.y <= rect2.y + rect2.height &&
+        rect1.y + rect1.height >= rect2.y) {
+            console.log('Sticky WALLLLL!')
+            player.direction.right = false;
+            player.direction.left = false
+            player.direction.down = false
+            player.direction.up = false
         }
 }
+////////////// Friend ///////////////
+const detectFriend = (rect1, rect2) => {
+    if(rect1.x <= rect2.x + rect2.width &&
+        rect1.x + rect1.width >= rect2.x &&
+        rect1.y <= rect2.y + rect2.height &&
+        rect1.y + rect1.height >= rect2.y) {
+        console.log('friend!')
+        friend.alive = false
+        }
+        
+    }
+
 
 
 ////////// Health Bar ///////////
 // the player will need to have a healthbar so when a hit is detected from the monster, health will go down 
 // if health bar reaches 0 the player.alive will need to be false and game will end
+// healthbar isn't implimented yet It will be in version 2
 const canvas = document.getElementById("canvas2");
 const context = canvas.getContext("2d");
 const width = canvas.width = 270;
@@ -333,49 +337,57 @@ const gameLoop = () => {
    // }
 
    if (player.alive) {
-       monster.render()
-       detectHit(player)
-    } else {
-    message.textContent = 'You lost!'
-    stopGameLoop()
-}
-
-
-
-    ////// Player detects wall ///////
-    // the wall needs to be able to block player 
-//    if(player.x <= block.x + block.width &&
-//        player.x >= block.x - block.width &&
-//        player.y <= block.y + block.height &&
-//        player.y >= block.y - block.height) {
-//        console.log('moved')
-//        player.x = move * 10
-//        player.y = move * 10
-//    }
-//    // block 2
-//    if(player.x <= block2.x + block2.width &&
-//        player.x >= block2.x - block2.width &&
-//        player.y <= block2.y + block2.height &&
-//        player.y >= block2.y - block2.height) {
-//        console.log('moved')
-//        player.x = move * 10
-//        player.y = move * 10
-//    }
-
-        
+   
+   
+   // detectHit(player)
+   // player.movePlayer()
+   // friend.render()
+   // monster.setDirection()
+    block.render()
+    block2.render()
+    block3.render()
+    block4.render()
+    block5.render()
+    detectTouch(player, block)
+    detectTouch(player, block2)
+    detectTouch(player, block3)
+    detectTouch(player, block4)
+    detectTouch(player, block5)
+   // detectFriend(player, friend)
     player.render()
     player.movePlayer()
-    block.render()
+    monster.render()
+    friend.render()
+    detectFriend(friend, player)
+    monster.setDirection()
+    detectHit(player)
+
+    } else {
+       message.textContent = 'You lost!'
+       stopGameLoop()
+    }
+//////////////// Friend Loop //////////
+    if (friend.alive) {
+        detectFriend(player, friend)
+    } else {
+        message.textContent = 'You won!'
+        stopGameLoop()
+    }
+}
+
+        
+    // player.render()
+    // player.movePlayer()
+    // block.render()
+    // friend.render()
+    
     // block2.render()
     // block3.render()
     // block4.render()
     // block5.render()
-    // monster.setDirection()
     // blocked()
-     detectWall(block)
 
     //movement.textContent = `${player.x}, ${player.y}`
-}
 
 //////////// EVENT LISTENERS /////////////////////
 
@@ -395,21 +407,21 @@ document.addEventListener('keyup', (e) => {
     }
 })
 
-// const timer = () => {
-//     let sec = 30
-//     const timer = setInterval(function() {
-//         document.getElementById('clock').innerHTML = '00:' ''
-//         sec--;
-//         if (sec < 0) {
-//             clearInterval(timer);
-//         }
-//     }, 1000);
-// }
+const timer = () => {
+    let sec = 30
+    const timer = setInterval(function() {
+        document.getElementById('clock').innerHTML = '00:'
+        sec--;
+        if (sec < 0) {
+            clearInterval(timer);
+        }
+    }, 1000);
+}
     
 
 // we're going to save our game interval to a variable so we can stop it when we want to
-// this interval runs the game loop every 60ms until we tell it to stop
-const gameInterval = setInterval(gameLoop, 60)
+// this interval runs the game loop every 35ms until we tell it to stop
+const gameInterval = setInterval(gameLoop, 35)
 // fn that stops the game loop
 const stopGameLoop = () => { clearInterval(gameInterval) }
 

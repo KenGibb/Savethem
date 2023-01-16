@@ -13,7 +13,7 @@
     border: 5px transparent black;
     font-size: 70px;
     background-image: 
-    linear-gradient(to right, red,blue); 
+    linear-gradient(to right, rgb(248, 218, 27),rgb(136, 0, 255)); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;  
     animation: move 2s linear infinite;
